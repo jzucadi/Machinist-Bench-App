@@ -6,6 +6,9 @@
 <title>The Machinist's Bench</title>
 <meta name="description" content="Speeds, feeds, threads, tolerances, and tooling reference — worked out on your phone, right at the machine.">
 <meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -6850,6 +6853,13 @@ _root.render(ce(App));
   }
   attempt();
 })();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').catch(function(e){ /* offline caching unavailable */ });
+  });
+}
 </script>
 </body>
 </html>
