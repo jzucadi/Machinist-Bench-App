@@ -14,4 +14,6 @@ final class UnitsTests: XCTestCase {
     func testUnitSystemCases() {
         XCTAssertEqual(UnitSystem.allCases, [.imperial, .metric])
     }
+    func testMMtoInch() { XCTAssertEqual(Convert.inch(fromMM: 38.1), 1.5, accuracy: 1e-9) }
+    func testHPtoKW()   { XCTAssertEqual(Convert.kW(fromHP: 2.88), 2.147616, accuracy: 1e-9) }
 }

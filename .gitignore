@@ -2,3 +2,10 @@
 /agents
 /skills-lock.json
 /settings.local.json
+/docs
+/gitignore
+.build/
+DerivedData/
+*.xcuserstate
+**/xcuserdata/
+.DS_Store
