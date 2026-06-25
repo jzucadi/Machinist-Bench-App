@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct TurningView: View {
-    let system: UnitSystem
+    @AppStorage("unitSystem") private var unitRaw = UnitSystem.imperial.rawValue
+    private var system: UnitSystem { UnitSystem(rawValue: unitRaw) ?? .imperial }
 
     @State private var materialID = "lowc"
     @State private var tool: Tool = .carbide
@@ -48,6 +49,7 @@ struct TurningView: View {
             .padding(16)
         }
         .background(Catppuccin.base)
+        .unitToolbar()
         .onAppear { seedSFM() }
         .onChange(of: materialID) { reseed(); feed = material.feedIPR }
         .onChange(of: tool) { reseed() }
@@ -138,5 +140,5 @@ struct TurningView: View {
 }
 
 #Preview {
-    TurningView(system: .imperial)
+    NavigationStack { TurningView() }
 }

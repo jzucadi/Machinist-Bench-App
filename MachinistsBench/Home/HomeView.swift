@@ -1,40 +1,55 @@
 import SwiftUI
+import UIKit
 
 struct HomeView: View {
-    @AppStorage("unitSystem") private var unitRaw = UnitSystem.imperial.rawValue
-    private var system: UnitSystem { UnitSystem(rawValue: unitRaw) ?? .imperial }
+    init() {
+        // Color the navigation titles lavender (no native SwiftUI modifier for this yet).
+        // Must set all three appearances; the large title at scroll-top uses scrollEdgeAppearance.
+        let lavender = UIColor(Catppuccin.lavender)
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.largeTitleTextAttributes = [.foregroundColor: lavender]
+        appearance.titleTextAttributes = [.foregroundColor: lavender]
+        let bar = UINavigationBar.appearance()
+        bar.standardAppearance = appearance
+        bar.scrollEdgeAppearance = appearance
+        bar.compactAppearance = appearance
+    }
 
     var body: some View {
         NavigationStack {
             List {
                 ForEach(SectionCatalog.groups, id: \.0) { groupName, items in
-                    Section(groupName) {
+                    Section {
                         ForEach(items) { item in row(item) }
+                    } header: {
+                        Text(groupName)
+                            .font(AppFont.display(13))
+                            .foregroundStyle(Catppuccin.lavender)
                     }
                 }
             }
             .scrollContentBackground(.hidden)
             .background(Catppuccin.base)
             .navigationTitle("Machinist's Bench")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Picker("Units", selection: $unitRaw) {
-                        Text("Imperial").tag(UnitSystem.imperial.rawValue)
-                        Text("Metric").tag(UnitSystem.metric.rawValue)
-                    }.pickerStyle(.segmented)
-                }
-            }
         }
         .tint(Catppuccin.blue)
     }
 
     @ViewBuilder private func row(_ item: SectionItem) -> some View {
-        if item.available, item.id == "turn" {
+        if item.available {
             NavigationLink {
-                TurningView(system: system).navigationTitle(item.name)
+                destination(for: item.id).navigationTitle(item.name)
             } label: { label(item) }
         } else {
             label(item).foregroundStyle(Catppuccin.overlay0)
+        }
+    }
+
+    @ViewBuilder private func destination(for id: String) -> some View {
+        switch id {
+        case "turn": TurningView()
+        default: EmptyView()
         }
     }
 

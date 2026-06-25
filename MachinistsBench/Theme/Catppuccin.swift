@@ -15,6 +15,7 @@ enum Catppuccin {
     static let subtext0 = hex(0xa6adc8)
     static let overlay0 = hex(0x6c7086)
     static let blue     = hex(0x89b4fa)
+    static let lavender = hex(0xb4befe)
     static let teal     = hex(0x94e2d5)
     static let green    = hex(0xa6e3a1)
     static let peach    = hex(0xfab387)

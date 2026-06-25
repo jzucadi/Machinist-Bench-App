@@ -11,7 +11,7 @@ struct NumberInput: View {
                 .keyboardType(.decimalPad)
                 .font(AppFont.mono(16))
                 .foregroundStyle(Catppuccin.text)
-            Stepper("", value: $value, step: step).labelsHidden()
+            Stepper("", value: $value, step: step).labelsHidden().tint(Catppuccin.lavender)
         }
         .padding(.horizontal, 12).padding(.vertical, 8)
         .background(Catppuccin.surface0, in: RoundedRectangle(cornerRadius: 8))
