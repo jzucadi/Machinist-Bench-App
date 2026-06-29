@@ -49,6 +49,13 @@ struct HomeView: View {
     @ViewBuilder private func destination(for id: String) -> some View {
         switch id {
         case "turn": TurningView()
+        case "drill": DrillingView()
+        case "mill": MillingView()
+        case "tap": TappingView()
+        case "thread": ThreadingView()
+        case "bore": BoringView()
+        case "ream": ReamingView()
+        case "saw": BandSawView()
         default: EmptyView()
         }
     }
